@@ -4,7 +4,7 @@ const createNewBoard = (entered_words) => {
 
     const new_board = new Array(5)
 
-    for(let i=0; i<5; ++i){
+    for(let i=0; i<6; ++i){
         new_board[i] = entered_words[i] ? entered_words[i] : ''    
     }
     return new_board

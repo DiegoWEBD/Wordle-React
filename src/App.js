@@ -9,9 +9,9 @@ import LeaderBoard from './components/LeaderBoard'
 const styles = {
   display: 'flex',
   flexDirection: 'column',
-  gap: '4rem',
   alignItems: 'center',
-  paddingBottom: '2rem'
+  padding: '5rem 0',
+  gap: '2.5rem',
 }
 
 const App = () => {

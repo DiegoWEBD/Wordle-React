@@ -7,6 +7,7 @@ const form_style = {
     borderRadius: 3,
     display: 'flex',
     flexDirection: 'column',
+    width: '100%',
 }
 
 const input_style = {

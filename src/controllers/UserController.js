@@ -28,6 +28,21 @@ export const updateUserRecord = async (user_id, record) => {
     }
 }
 
+export const createUser = async (name) => {
+
+    try{
+        const response = await fetch(`${API_BASE_URL}/create-user/${name}`)
+
+        if(!response.ok) throw new NetworkError()
+
+        const user = await response.json()
+        return user
+    
+    } catch(err){
+        throw err
+    }
+}
+
 class NetworkError extends Error {
     constructor(){
         super('Error de red')

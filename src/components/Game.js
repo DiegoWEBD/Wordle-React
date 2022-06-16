@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-import { removeAccents } from '../utilities'
+import { getWordForGame } from '../utilities'
 import { updateUserRecord } from '../controllers/UserController'
 
 import Board from './Board'
@@ -8,6 +8,14 @@ import Checker from './Checker'
 import InputWord from './InputWord'
 import PlayerInfo from './PlayerInfo'
 import ErrorMessage from './ErrorMessage'
+
+const styles = {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    gap: '2rem',
+    width: '24rem'
+}
 
 const Game = ({ player, setPlayer }) => {
 
@@ -17,22 +25,9 @@ const Game = ({ player, setPlayer }) => {
     const [end_game, setEndGame] = useState(false)
     const [error_state, setErrorState] = useState({ has_error: false })
 
-    const getWordForGame = () => {
-
-        fetch('https://clientes.api.greenborn.com.ar/public-random-word?c=99')
-            .then(res => res.json())
-            .then(words => {
-                words = words.filter(word => word.length === 5)
-                const index = parseInt(Math.random() * (words.length - 1))
-                setCorrectWord(removeAccents(words[index].toUpperCase()))
-            })
-            .catch(err => console.log(err))
-    }
-
     const setWinningWord = (word) => {
 
-        setEnteredWords([])
-        
+        setEnteredWords([])        
         setWinningWords([
             ...winning_words,
             word
@@ -65,11 +60,15 @@ const Game = ({ player, setPlayer }) => {
     }
 
     useEffect(() => {
+
         getWordForGame()
+            .then(word => setCorrectWord(word))
+            .catch(handleError)
+
     }, [winning_words])
 
     return (
-        <div>
+        <div style={styles}>
             <PlayerInfo 
                 player={player} 
                 current_record={winning_words.length}    

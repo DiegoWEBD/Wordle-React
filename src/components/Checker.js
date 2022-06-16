@@ -6,9 +6,9 @@ import { YELLOW_COLOR, RED_COLOR, GREEN_COLOR } from '../utilities'
 const tries_style = (attemp_number) => {
     let color = GREEN_COLOR
     
-    if(attemp_number === 2 || attemp_number === 3)
+    if(attemp_number === 3 || attemp_number === 4)
         color = YELLOW_COLOR
-    else if(attemp_number === 4)
+    else if(attemp_number === 5)
         color = RED_COLOR
 
     return {
@@ -31,7 +31,7 @@ const Checker = ({ last_word, correct_word, handleEndGame, setWinningWord, attem
                 setGameWon(false)
             }, 2500)
         }
-        else if(attempt_number === 5)
+        else if(attempt_number === 6)
             handleEndGame()
     }
 
@@ -43,8 +43,8 @@ const Checker = ({ last_word, correct_word, handleEndGame, setWinningWord, attem
     if(game_won)
         return <SuccessMessage message='Felicidades! Has ganado' />
     
-    else if(attempt_number < 5)
-        return <p style={tries_style(attempt_number)}> Te quedan { 5 - attempt_number } intentos </p>
+    else if(attempt_number < 6)
+        return <p style={tries_style(attempt_number)}> Te quedan { 6 - attempt_number } intentos </p>
 
     const lose_message = `La palabra correcta era ${correct_word}`
     return <ErrorMessage message={lose_message} />

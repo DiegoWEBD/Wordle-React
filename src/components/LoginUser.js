@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useFormik } from 'formik'
+import { createUser } from '../controllers/UserController'
 import ErrorMessage from './ErrorMessage'
 
 const form_styles = {
@@ -32,16 +33,6 @@ const LoginUser = ({ setPlayer, registered_users }) => {
 
     const [error, setError] = useState(null)
 
-    const createUser = (name) => {
-
-        const url = `https://api.diego-maldonado.com/wordle/create-user/${name}`
-
-        fetch(url)
-            .then(res => res.json())
-            .then(user => setPlayer(user))
-            .catch(() => setError('Error creando usuario'))
-    }
-
     const onSubmit = ({ user_name }, on_submit_props) => {
         
         const user = registered_users.find(u => u.name === user_name.toLowerCase())
@@ -50,6 +41,8 @@ const LoginUser = ({ setPlayer, registered_users }) => {
             setPlayer(user)
         }
         else createUser(user_name.toLowerCase())
+                .then(user => setPlayer(user))
+                .catch(setError)
 
         on_submit_props.resetForm()
     }
