@@ -1,3 +1,4 @@
+import { analizeWord } from '../utilities'
 import WordContainer from './WordContainer'
 
 const createNewBoard = (entered_words) => {
@@ -20,7 +21,7 @@ const Board = ({ correct_word, entered_words }) => {
                 board.map((w, index) => 
                     <WordContainer 
                         key={index}
-                        correct_word={correct_word} 
+                        correct_word_analysis={ analizeWord(correct_word) } 
                         entered_word={entered_words[index]}
                     />
                 )

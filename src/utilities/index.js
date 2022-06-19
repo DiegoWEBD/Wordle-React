@@ -39,3 +39,24 @@ export const getWordForGame = async () => {
 const removeAccents = (str) => {
   return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '')
 }
+
+export const analizeWord = (word) => {
+  const analysis = []
+
+  for(let i=0; i<word.length; ++i){
+      
+      if(!analysis.find(l => l.key === word[i])){
+          analysis.push({ 
+              key: word[i],
+              indices: [i]
+          })
+      } 
+      else { 
+          analysis
+            .find(l => l.key === word[i])
+            .indices.push(i)
+      }
+  }
+
+  return analysis
+}
